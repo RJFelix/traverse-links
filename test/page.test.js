@@ -59,7 +59,7 @@ describe('Page model', () => {
 
   });
 
-  it('should reject links that are not Pages', () => {
+  it('should throw for links that are not Pages', () => {
 
     const testData = {
       title: 'Awesome page',
@@ -69,12 +69,8 @@ describe('Page model', () => {
 
     const testPage = new Page(testData);
 
-    testPage.addLink({});
-    testPage.addLink(123);
-    testPage.addLink(new Page({title: '1', content: '2', url: '3'});
-
-    expect(testPage.links.length).toEqual(1);
-    expect(testPage.links[0].title).toEqual('1');
+    expect(() => testPage.addLink({})).toThrow();
+    expect(() => testPage.addLink(123)).toThrow();
 
   });
 
