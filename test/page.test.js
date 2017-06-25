@@ -5,7 +5,7 @@ const Page = require('../model/page.js');
 describe('Page model', () => {
 
   it('should create an object', () => {
-    const testPage = new Page();
+    const testPage = new Page({title: '1', content: '2', url: '3'});
     expect(testPage).toBeAn(Object);
   });
 
@@ -22,6 +22,17 @@ describe('Page model', () => {
     expect(testPage.content).toEqual('lorem ipsum dolor');
     expect(testPage.url).toEqual('https://www.github.com/awesome/page');
     expect(testPage.links).toBeAn(Array);
+  });
+
+  it('should throw if all fields are not provided', () => {
+
+    const testData = {
+      title: 'bad page',
+      content: 'bad content'
+    };
+
+    expect(() => new Page(testData)).toThrow();
+
   });
 
   it('should add an outgoing link', () => {
@@ -45,7 +56,26 @@ describe('Page model', () => {
     testPage1.addLink(testPage2);
 
     expect(testPage1.links[0]).toBe(testPage2);
+
   });
 
+  it('should reject links that are not Pages', () => {
+
+    const testData = {
+      title: 'Awesome page',
+      content: 'lorem ipsum dolor',
+      url: 'https://www.github.com/awesome/page',
+    };
+
+    const testPage = new Page(testData);
+
+    testPage.addLink({});
+    testPage.addLink(123);
+    testPage.addLink(new Page({title: '1', content: '2', url: '3'});
+
+    expect(testPage.links.length).toEqual(1);
+    expect(testPage.links[0].title).toEqual('1');
+
+  });
 
 });
