@@ -29,13 +29,13 @@ describe('displayPage', () => {
 
     const childPage1 = new Page({
       title: 'child 1',
-      content: '',
+      content: 'foo',
       url: 'url2',
     });
 
     const childPage2 = new Page({
       title: 'child 2',
-      content: '',
+      content: 'foo',
       url: 'url3',
     });
 
