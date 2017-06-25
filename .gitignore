@@ -2,6 +2,10 @@
 
 data
 
+# test output directory
+
+output
+
 # Created by https://www.gitignore.io/api/node,windows
 
 ### Node ###
